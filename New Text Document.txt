@@ -1,9 +1,0 @@
-<html>
-<head>
-<titel>My first devop</titel>
-</head>
-<body>
-<h2>hello cloud!!!!!</h2>
-<p>this is my first cloud app..</p>
-</body>
-</html>

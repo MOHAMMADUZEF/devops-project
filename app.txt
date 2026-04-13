@@ -1,3 +1,5 @@
 hello-devops 
 "I am practicing" 
 "this my second update"
+"hello" 
+"just trying ."
