@@ -21,4 +21,4 @@ jobs:
         run: echo "Automation is working"
 
       - name: Step 19 Manual Test
-        run: echo "Manual trigger is working"
+        run: echo "Manual trigger is working"-
