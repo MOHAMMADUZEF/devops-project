@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+    workflow_dispatch:
 
 jobs:
   build:
@@ -18,3 +19,6 @@ jobs:
 
       - name: Run a test message
         run: echo "Automation is working"
+
+      - name: Step 19 Manual Test
+        run: echo "Manual trigger is working"
