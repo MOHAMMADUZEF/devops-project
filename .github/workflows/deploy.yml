@@ -12,8 +12,14 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout code
+      - name: Step 1 - Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy message
-        run: echo "Running only on main branch"
+      - name: Step 2 - List files
+        run: ls
+
+      - name: Step 3 - Show current directory
+        run: pwd
+
+      - name: Step 4 - Print custom message
+        run: echo "Pipeline is working step by step"
