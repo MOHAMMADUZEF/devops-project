@@ -7,18 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Step 18 Debug
-        run: echo "Step 18 is working"
-
-      - name: Run a test message
-        run: echo "Automation is working"
-
-      - name: Step 19 Manual Test
-        run: echo "Manual trigger is working"-
+      - name: Deploy message
+        run: echo "Running only on main branch"
