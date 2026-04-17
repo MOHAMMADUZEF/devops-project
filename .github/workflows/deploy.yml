@@ -1,25 +1,23 @@
-name: DevOps Pipeline
+name: Multi Step Pipeline
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
+  build:
+    runs-on: ubantu-latest
     steps:
-      - name: Step 1 - Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Step 2 - List files
-        run: ls
+      - name: Build Step
+        run: echo "Building the project..."
 
-      - name: Step 3 - Show current directory
-        run: pwd
-
-      - name: Step 4 - Print custom message
-        run: echo "Pipeline is working step by step"
+  test:
+    run-on: ubantu-latest
+    needs: test
+    steps:
+      - name: Deploy step
+        run: echo "Deploying Project..."
