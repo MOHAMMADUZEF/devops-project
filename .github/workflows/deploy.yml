@@ -1,30 +1,18 @@
-name: Multi Step Pipeline
+name: Step 24 - Env & Secrets
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
-  build:
+  demo:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
 
-      - name: Build Step
-        run: echo "Building the project..."
+    env:
+      APP_NAME: MyApp
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Test Step
-        run: echo "Running Tests..."
+      - name: Print Environment Variable
+        run: echo "App name is $APP_NAME"
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Deploy Step
-        run: echo "Deploying project..."
+      - name: Use Secret
+        run: echo "Secret is ${{ secrets.MY_SECRET }}"
