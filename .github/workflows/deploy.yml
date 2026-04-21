@@ -1,18 +1,22 @@
-name: Step 24 - Env & Secrets
+name: Step 25 - Secrets
 
-on:
-  push:
+on: push
 
 jobs:
-  demo:
+  secret-test:
     runs-on: ubuntu-latest
 
-    env:
-      APP_NAME: MyApp
-
     steps:
-      - name: Print Environment Variable
-        run: echo "App name is $APP_NAME"
+      - name: Step 1 - Start
+        run: echo "Pipeline started"
 
-      - name: Use Secret
-        run: echo "Secret is ${{ secrets.MY_SECRET }}"
+      - name: Step 2 - Use Secret
+        env:
+          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
+        run: |
+          echo "Secret is being used"
+          echo "Length check only"
+          echo ${#DEMO_SECRET}
+
+      - name: Step 3 - End
+        run: echo "Pipeline finished"
