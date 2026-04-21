@@ -1,22 +1,32 @@
-name: Step 25 - Secrets
+name: Step 26 - Secret Usage
 
 on: push
 
 jobs:
-  secret-test:
+  secret-job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Step 1 - Start
-        run: echo "Pipeline started"
+        run: echo "Starting pipeline"
 
-      - name: Step 2 - Use Secret
+      - name: Step 2 - Validate Secret
         env:
           DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
         run: |
-          echo "Secret is being used"
-          echo "Length check only"
-          echo ${#DEMO_SECRET}
+          if [ -z "$DEMO_SECRET" ]; then
+            echo "Secret missing"
+            exit 1
+          else
+            echo "Secret exists"
+          fi
 
-      - name: Step 3 - End
+      - name: Step 3 - Simulate Login
+        env:
+          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
+        run: |
+          echo "Logging in with secret..."
+          echo "Login successful"
+
+      - name: Step 4 - End
         run: echo "Pipeline finished"
