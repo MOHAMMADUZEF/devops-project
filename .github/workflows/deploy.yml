@@ -1,32 +1,48 @@
-name: Step 26 - Secret Usage
+name: CI Pipeline
 
-on: push
+on:
+  push:
+    branches:
+      - main
+      - '*'
+  workflow_dispatch:
 
 jobs:
-  secret-job:
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Step 1 - Start
-        run: echo "Starting pipeline"
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Step 2 - Validate Secret
-        env:
-          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
-        run: |
-          if [ -z "$DEMO_SECRET" ]; then
-            echo "Secret missing"
-            exit 1
-          else
-            echo "Secret exists"
-          fi
+      - name: Build Step
+        run: echo "Building the project..."
 
-      - name: Step 3 - Simulate Login
-        env:
-          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
-        run: |
-          echo "Logging in with secret..."
-          echo "Login successful"
+  test:
+    needs: build
+    runs-on: ubuntu-latest
 
-      - name: Step 4 - End
-        run: echo "Pipeline finished"
+    steps:
+      - name: Run Tests
+        run: echo "Running tests..."
+
+  deploy-prod:
+    needs: test
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to PRODUCTION..."
+
+  deploy-dev:
+    needs: test
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Development
+        run: echo "Deploying to DEVELOPMENT..."
